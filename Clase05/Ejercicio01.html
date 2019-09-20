@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejercicio01</title>
+    <script type="text/javascript">
+        var obj={"codigo_barra":"ABC123","precio":257.33,"nombre":"tomate"};
+        console.log(obj);
+        alert(obj);
+
+        var ajax = new XMLHttpRequest();
+        ajax.open("POST","./json_test.php");
+        ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        ajax.send("producto="+JSON.stringify(obj));
+        ajax.onreadystatechange = function()
+        {
+            if(ajax.readyState == 4 && ajax.status == 200)
+            {
+                //console.log(ajax.responseText);
+                var producto = ajax.responseText;
+                var objProd = JSON.parse(producto);
+                console.log(objProd.nombre + " - " + objProd.codigo_barra + " - " + objProd.precio);
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
